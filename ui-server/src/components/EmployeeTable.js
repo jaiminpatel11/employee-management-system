@@ -84,7 +84,7 @@ const EmployeeTable = ({ employees, onDelete }) => {
               {employee.currentStatus === true ? "Working" : "Retired"}
             </TableCell>
             <TableCell>
-              <Button onClick={() => handleEdit(employee._id)}>Edit</Button>
+              <Button onClick={() => handleEdit(employee._id)}>Edit/View</Button>
               <Button onClick={() => onDelete(employee._id)}>Delete</Button>
             </TableCell>
           </TableRow>

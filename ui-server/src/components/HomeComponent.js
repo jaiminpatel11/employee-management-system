@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import logo from '../images/logo.png';
 
 // Style component for title
 const Title = styled.h1`
@@ -23,13 +24,13 @@ const Title = styled.h1`
   }
 `;
 
-const LogoContainer = styled.div`
-  text-align: center;
-`;
-
-const LogoImage = styled.img`
-  width: 200px; 
-  animation: rotate 2s linear infinite; 
+const CenteredImage = styled.img`
+  display: block; 
+  margin: 0 auto; 
+  width: 60%; 
+  max-width: 400px; 
+  height: auto; 
+  animation: rotate 5s linear infinite; 
   @keyframes rotate {
     0% {
       transform: rotate(0deg);
@@ -44,9 +45,7 @@ const Home = () => {
   return (
     <>
       <Title>Welcome to Our Employee Portal</Title>
-      <LogoContainer>
-        <LogoImage src="../images/logo.png" alt="React Logo" />
-      </LogoContainer>
+      <CenteredImage src={logo} alt="Company Logo" />
     </>
   );
 };
