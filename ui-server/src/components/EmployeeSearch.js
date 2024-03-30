@@ -6,6 +6,7 @@ const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  margin-top:20px;
 `;
 
 const SearchInput = styled.input`
@@ -25,7 +26,7 @@ const SearchButton = styled.button`
   cursor: pointer;
 `;
 // EmployeeSearch component
-const EmployeeSearch = ({ onSearch }) => {
+const EmployeeSearch = ({ onSearch,onDelete }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [department, setDepartment] = useState('');
 
@@ -33,6 +34,7 @@ const EmployeeSearch = ({ onSearch }) => {
   const handleSearch = () => {
     onSearch({ searchTerm, department });
   };
+
 
   return (
     <SearchContainer>

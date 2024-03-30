@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import styled from 'styled-components';
@@ -161,7 +162,7 @@ const EmployeeCreate = () => {
         <FormGroup>
           <Label>Date of Joining</Label>
           <Input
-            type="date"
+            type="Date"
             name="dateOfJoining"
             value={formData.dateOfJoining}
             onChange={handleChange}

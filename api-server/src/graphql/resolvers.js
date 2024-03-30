@@ -21,6 +21,10 @@ const resolvers = {
           }
         }
 
+        if(filter.employeeType){
+          query.employeeType = filter.employeeType;
+        }
+
         // Use the constructed query to fetch users
         const users = await User.find(query);
         return users;
@@ -28,6 +32,17 @@ const resolvers = {
         throw new Error('Error fetching users');
       }
     },
+    userById:async(_,{id}) => {
+      try {
+        const user = await User.findById(id);
+        if(!user){
+          throw new Error('User Not found');
+        }
+        return user;
+      }catch(error){
+        throw new Error(error.message);
+      }
+    }
   },
   Mutation: {
     createUser: async (_, { firstName, lastName, age, dateOfJoining, title, department, employeeType }) => {
@@ -70,7 +85,45 @@ const resolvers = {
         throw new Error(error.message);
       }
     },
-  },
+    updateEmployee: async (_, { id, title, department, currentStatus }) => {
+      try {
+        const user = await User.findById(id);
+        if (!user) {
+          throw new Error('User not found');
+        }
+  
+        if (title) {
+          user.title = title;
+        }
+        if (department) {
+          user.department = department;
+        }
+        if (currentStatus !== undefined) {
+          user.currentStatus = currentStatus
+        }
+  
+        await user.save();
+        return user;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+
+      deleteEmployee: async (_, { id }) => {
+        try {
+     
+          const deletedUser = await User.findByIdAndDelete(id);
+          if (!deletedUser) {
+            throw new Error('User not found');
+          }
+          return true;
+        } catch (error) {
+          throw new Error(error.message);
+        }
+      },
+
+      
+    }
 };
 
 module.exports = resolvers;
