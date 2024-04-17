@@ -1,43 +1,6 @@
 import React from "react";
-import styled from "styled-components";
+import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
-
-// Styled components
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-`;
-
-const TableHead = styled.thead`
-  background-color: #01d676;
-  color: #fff;
-`;
-
-const TableHeadCell = styled.th`
-  padding: 12px;
-`;
-
-const Button = styled.button`
-  width: 50%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #01d676;
-  color: #fff;
-  cursor: pointer;
-`;
-
-const TableRow = styled.tr`
-  &:nth-child(even) {
-    background-color: #131a24;
-  }
-`;
-
-const TableCell = styled.td`
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
-  color: #ffffff;
-`;
 
 // Display all the employee data in the table format
 const EmployeeTable = ({ employees, onDelete }) => {
@@ -56,41 +19,39 @@ const EmployeeTable = ({ employees, onDelete }) => {
   };
 
   return (
-    <Table>
-      <TableHead>
+    <table className="table table-striped">
+      <thead className="bg-primary text-white">
         <tr>
-          <TableHeadCell>FirstName</TableHeadCell>
-          <TableHeadCell>LastName</TableHeadCell>
-          <TableHeadCell>Age</TableHeadCell>
-          <TableHeadCell>DateOfJoining</TableHeadCell>
-          <TableHeadCell>Title</TableHeadCell>
-          <TableHeadCell>Department</TableHeadCell>
-          <TableHeadCell>EmployeeType</TableHeadCell>
-          <TableHeadCell>CurrentStatus</TableHeadCell>
-          <TableHeadCell>Action</TableHeadCell>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Age</th>
+          <th>DateOfJoining</th>
+          <th>Title</th>
+          <th>Department</th>
+          <th>EmployeeType</th>
+          <th>CurrentStatus</th>
+          <th>Action</th>
         </tr>
-      </TableHead>
+      </thead>
       <tbody>
         {employees.map((employee) => (
-          <TableRow key={employee._id}>
-            <TableCell>{employee.firstName}</TableCell>
-            <TableCell>{employee.lastName}</TableCell>
-            <TableCell>{employee.age}</TableCell>
-            <TableCell>{formatDate(employee.dateOfJoining)}</TableCell>
-            <TableCell>{employee.title}</TableCell>
-            <TableCell>{employee.department}</TableCell>
-            <TableCell>{employee.employeeType}</TableCell>
-            <TableCell>
-              {employee.currentStatus === true ? "Working" : "Retired"}
-            </TableCell>
-            <TableCell>
-              <Button onClick={() => handleEdit(employee._id)}>Edit/View</Button>
-              <Button onClick={() => onDelete(employee._id)}>Delete</Button>
-            </TableCell>
-          </TableRow>
+          <tr key={employee._id}>
+            <td>{employee.firstName}</td>
+            <td>{employee.lastName}</td>
+            <td>{employee.age}</td>
+            <td>{formatDate(employee.dateOfJoining)}</td>
+            <td>{employee.title}</td>
+            <td>{employee.department}</td>
+            <td>{employee.employeeType}</td>
+            <td>{employee.currentStatus === true ? "Working" : "Retired"}</td>
+            <td>
+              <Button variant="primary" onClick={() => handleEdit(employee._id)}>Edit/View</Button>
+              <Button variant="danger" onClick={() => onDelete(employee._id)}>Delete</Button>
+            </td>
+          </tr>
         ))}
       </tbody>
-    </Table>
+    </table>
   );
 };
 

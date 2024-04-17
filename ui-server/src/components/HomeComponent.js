@@ -27,8 +27,7 @@ const Title = styled.h1`
 const CenteredImage = styled.img`
   display: block; 
   margin: 0 auto; 
-  width: 60%; 
-  max-width: 400px; 
+  max-width: 100%; 
   height: auto; 
   animation: rotate 5s linear infinite; 
   @keyframes rotate {
@@ -43,10 +42,10 @@ const CenteredImage = styled.img`
 
 const Home = () => {
   return (
-    <>
+    <div className="container text-center">
       <Title>Welcome to Our Employee Portal</Title>
-      <CenteredImage src={logo} alt="Company Logo" />
-    </>
+      <CenteredImage src={logo} alt="Company Logo" className="img-fluid" />
+    </div>
   );
 };
 

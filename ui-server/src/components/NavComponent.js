@@ -1,54 +1,40 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
+import { Navbar as BootstrapNavbar, Nav } from 'react-bootstrap';
 import styled from 'styled-components';
 
-const NavbarContainer = styled.nav`
-  background-color: #01D676;
-  padding: 20px 30px;
-  display: flex;
-  justify-content: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+const NavbarContainer = styled.div`
+  margin-bottom: 20px;
 `;
 
-const NavbarList = styled.ul`
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-`;
-
-const NavbarItem = styled.li`
-  margin-right: 20px;
-`;
-
-const NavbarLink = styled(Link)`
+const CustomNavLink = styled(NavLink)`
   text-decoration: none;
   color: white;
   font-weight: bold;
-  transition: color 0.3s ease;
   padding: 10px 15px;
   font-size: 18px;
   border-radius: 5px;
+  transition: background-color 0.3s ease;
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
+`;
+
+const CustomNavbar = styled(BootstrapNavbar)`
+  background-color: #4663A9;
+  display: flex;
+  justify-content: center;
 `;
 
 const Navbar = () => {
   return (
     <>
       <NavbarContainer>
-        <NavbarList>
-          <NavbarItem>
-            <NavbarLink to="/">Home</NavbarLink>
-          </NavbarItem>
-          <NavbarItem>
-            <NavbarLink to="/search">Search Employee</NavbarLink>
-          </NavbarItem>
-          <NavbarItem>
-            <NavbarLink to="/create">Create Employee</NavbarLink>
-          </NavbarItem>
-        </NavbarList>
+        <CustomNavbar variant="light">
+            <CustomNavLink as={NavLink} to="/">Home</CustomNavLink>
+            <CustomNavLink as={NavLink} to="/search">Search Employee</CustomNavLink>
+            <CustomNavLink as={NavLink} to="/create">Create Employee</CustomNavLink>
+        </CustomNavbar>
       </NavbarContainer>
 
       <Outlet />

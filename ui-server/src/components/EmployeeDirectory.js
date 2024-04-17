@@ -1,40 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import EmployeeSearch from './EmployeeSearch';
 import EmployeeTable from './EmployeeTable'; 
 import { useLazyQuery, useMutation, gql } from '@apollo/client';
 import { GET_EMPLOYEES } from '../queries';
-
-const StyledContainer = styled.div`
-  padding: 20px;
-`;
-
-const StyledHeaderText = styled.h4`
-  color: white;
-  font-size: 18px;
-  margin-bottom: 10px;
-`;
-
-const StyledButtonContainer = styled.div`
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const StyledButton = styled.button`
-  padding: 10px 20px;
-  background-color: #01D676;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  margin-right: 10px;
-  margin-bottom: 20px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #0BB54E;
-  }
-`;
 
 const DELETE_EMPLOYEE = gql`
   mutation DeleteEmployee($id: ID!) {
@@ -85,16 +53,16 @@ const EmployeeDirectory = () => {
   };
 
   return (
-    <StyledContainer>
+    <div className="container">
       <EmployeeSearch onSearch={handleSearch} />
-      <StyledHeaderText>You can also filter employees by type</StyledHeaderText>
-      <StyledButtonContainer>
-        <StyledButton onClick={() => filterEmployeeByType('FullTime')}>Full Time</StyledButton>
-        <StyledButton onClick={() => filterEmployeeByType('PartTime')}>Part Time</StyledButton>
-        <StyledButton onClick={() => filterEmployeeByType('Contract')}>Contract</StyledButton>
-        <StyledButton onClick={() => filterEmployeeByType('Seasonal')}>Seasonal</StyledButton>
-        <StyledButton onClick={() => filterEmployeeByType(null)}>All Employees</StyledButton>
-      </StyledButtonContainer>
+      <h4 className="text-white mt-4">You can also filter employees by type</h4>
+      <div className="btn-group mt-2" role="group">
+        <button type="button" className="btn btn-success" onClick={() => filterEmployeeByType('FullTime')}>Full Time</button>
+        <button type="button" className="btn btn-success" onClick={() => filterEmployeeByType('PartTime')}>Part Time</button>
+        <button type="button" className="btn btn-success" onClick={() => filterEmployeeByType('Contract')}>Contract</button>
+        <button type="button" className="btn btn-success" onClick={() => filterEmployeeByType('Seasonal')}>Seasonal</button>
+        <button type="button" className="btn btn-success" onClick={() => filterEmployeeByType(null)}>All Employees</button>
+      </div>
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
@@ -102,7 +70,7 @@ const EmployeeDirectory = () => {
       ) : (
         <EmployeeTable employees={filteredEmployees} onDelete={handleDelete} />
       )}
-    </StyledContainer>
+    </div>
   );
 };
 

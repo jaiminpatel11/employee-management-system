@@ -24,8 +24,8 @@ const FooterComponent = ({ children }) => {
   return (
     <Container>
       <Content>{children}</Content>
-      <StickyFooter className='text-center text-lg-left' style={{ backgroundColor: '#ffffff' }}>
-        <div className='text-center p-3'>
+      <StickyFooter className='text-center text-lg-left' style={{ backgroundColor: '#4663A9' }}>
+        <div className='text-center p-3' style={{color: '#ffffff' }}>
           &copy; {new Date().getFullYear()} EMS.COM
         </div>
       </StickyFooter>
