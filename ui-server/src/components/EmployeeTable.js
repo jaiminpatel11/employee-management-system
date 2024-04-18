@@ -46,7 +46,7 @@ const EmployeeTable = ({ employees, onDelete }) => {
             <td>{employee.currentStatus === true ? "Working" : "Retired"}</td>
             <td>
               <Button variant="primary" onClick={() => handleEdit(employee._id)}>Edit/View</Button>
-              <Button variant="danger" onClick={() => onDelete(employee._id)}>Delete</Button>
+              <Button variant="danger" onClick={() => onDelete(employee._id,employee.currentStatus)}>Delete</Button>
             </td>
           </tr>
         ))}

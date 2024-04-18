@@ -3,6 +3,8 @@ import EmployeeSearch from './EmployeeSearch';
 import EmployeeTable from './EmployeeTable'; 
 import { useLazyQuery, useMutation, gql } from '@apollo/client';
 import { GET_EMPLOYEES } from '../queries';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const DELETE_EMPLOYEE = gql`
   mutation DeleteEmployee($id: ID!) {
@@ -14,6 +16,7 @@ const EmployeeDirectory = () => {
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [getFilteredEmployees, { loading, error, data }] = useLazyQuery(GET_EMPLOYEES);
   const [deleteEmployee] = useMutation(DELETE_EMPLOYEE);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   useEffect(() => {
     if (data && data.users) {
@@ -31,7 +34,13 @@ const EmployeeDirectory = () => {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id, currentStatus) => {
+    if (currentStatus === true) {
+      console.log("can not delete emplopyee")
+      setSnackbarOpen(true);
+      return; 
+    }
+
     try {
       const { data: { deleteEmployee: isDeleted } } = await deleteEmployee({ variables: { id } });
       if (isDeleted) {
@@ -52,6 +61,10 @@ const EmployeeDirectory = () => {
     });
   };
 
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
   return (
     <div className="container">
       <EmployeeSearch onSearch={handleSearch} />
@@ -70,6 +83,21 @@ const EmployeeDirectory = () => {
       ) : (
         <EmployeeTable employees={filteredEmployees} onDelete={handleDelete} />
       )}
+      <Snackbar 
+        open={snackbarOpen} 
+        autoHideDuration={6000} 
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <MuiAlert 
+          elevation={6} 
+          variant="filled" 
+          onClose={handleSnackbarClose} 
+          severity="error"
+        >
+          CAN'T DELETE EMPLOYEE - STATUS ACTIVE
+        </MuiAlert>
+      </Snackbar>
     </div>
   );
 };
